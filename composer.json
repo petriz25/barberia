@@ -1,0 +1,19 @@
+{
+    "name": "clayn/app-salon",
+    "description": "Pagina de Barberia MVC",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "MVC\\": "./",
+            "Controllers\\": "./controllers",
+            "Model\\": "./models"
+        }
+    },
+    "authors": [
+        {
+            "name": "petriz25",
+            "email": "107162071+petriz25@users.noreply.github.com"
+        }
+    ],
+    "require": {}
+}
