@@ -2,10 +2,10 @@
 
 namespace Model;
 
-class Usiario extends ActiveRecord{
+class Usuario extends ActiveRecord{
     //Base de datos
     protected static $tabla = 'usuarios';
-    protected static $columnasBD = ['id','nombre','apellido','email','password','telefono','admin','confirmado','token'];
+    protected static $columnasDB = ['id','nombre','apellido','email','password','telefono','admin','confirmado','token'];
 
     public $id;
     public $nombre;
@@ -25,8 +25,52 @@ class Usiario extends ActiveRecord{
         $this->email = $args['email'] ?? '';
         $this->password = $args['password'] ?? '';
         $this->telefono = $args['telefono'] ?? '';
-        $this->admin = $args['admin'] ?? null;
-        $this->confirmado = $args['confirmado'] ?? null;
+        $this->admin = $args['admin'] ?? 0;
+        $this->confirmado = $args['confirmado'] ?? 0;
         $this->token = $args['token'] ?? '';
+    }
+    
+    //Mensajes de validación para la creación de la cuenta
+    public function validarNuevaCuenta(){
+        if(!$this->nombre){
+            self::$alertas['error'][]="Ingresa tu nombre";
+        }
+        if(!$this->apellido){
+            self::$alertas['error'][]="Ingresa tu apellido";
+        }
+        if(!$this->email){
+            self::$alertas['error'][]="Ingresa tu email";
+        }
+        if(!$this->password){
+            self::$alertas['error'][]="Ingresa tu contraseña";
+        }
+        if(strlen($this->password) < 6){
+            self::$alertas['error'][]="La contraseña debe contener almenos 6 caracteres";
+        }
+        if(!$this->telefono){
+            self::$alertas['error'][]="Ingresa tu telefono";
+        }
+
+        return self::$alertas;
+    }
+
+    //Revisa si el usuario ya existe
+    public function existeUsuario(){
+        $query = "SELECT * FROM ". self::$tabla ." WHERE email = '". $this->email . "' LIMIT 1";
+        $resultado = self::$db->query($query);
+
+        if($resultado->num_rows){
+            self::$alertas['error'][] = "El correo ya se encuentra registrado";
+        }
+
+        return $resultado;
+    }
+
+    public function hashPassword(){
+        $this->password = password_hash($this->password, PASSWORD_BCRYPT);
+    }
+
+    public function crearToken(){
+        $this->token = uniqid();
     }
 }

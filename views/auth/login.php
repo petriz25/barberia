@@ -22,7 +22,10 @@
         >
     </div>
 
-    <input type="submit" class="boton" value="Iniciar sesión">
+    <div class="acceso">
+        <input type="submit" class="boton" value="Iniciar sesión">
+        <input type="submit" class="boton" value="Entrar como invitado">
+    </div>
 
     <div class="acciones">
         <a href="/crear-cuenta">¿Aún no tienes una cuenta? Crea una</a>
