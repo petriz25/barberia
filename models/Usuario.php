@@ -73,4 +73,45 @@ class Usuario extends ActiveRecord{
     public function crearToken(){
         $this->token = uniqid();
     }
+
+    public function validarLogin(){
+        if(!$this->email){
+            self::$alertas['error'][]="Ingresa tu email";
+        }
+
+        if(!$this->password){
+            self::$alertas['error'][]="Ingresa tu contraseña";
+        }
+
+        return self::$alertas;
+    }
+
+    public function validarEmail(){
+        if(!$this->email){
+            self::$alertas['error'][]="Ingresa tu email";
+        }
+        return self::$alertas;
+    }
+
+    public function validarPassword(){
+        if(!$this->password){
+            self::$alertas['error'][]="Ingresa tu contraseña";
+        }
+
+        if(strlen($this->password) < 6){
+            self::$alertas['error'][]="La contraseña debe contener almenos 6 caracteres";
+        }
+        
+        return self::$alertas;
+    }
+
+    public function comprobarPasswordAndVerificado($password){
+        $resultado = password_verify($password, $this->password);
+
+        if(!$resultado || !$this->confirmado){
+            self::$alertas['error'][]='Contraseña incorrecta o cuenta no confirmada';
+        }else{
+            return true;
+        }
+    }
 }
