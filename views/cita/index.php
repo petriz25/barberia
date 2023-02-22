@@ -4,7 +4,7 @@
 <div class="app">
     <nav class="tabs">
         <button type="button" data-paso="1">Servicios</button>
-        <button type="button" data-paso="2">Información</button>
+        <button type="button" data-paso="2">Información Cita</button>
         <button type="button" data-paso="3">Resumen</button>
     </nav>
     <div class="seccion" id="paso-1">
