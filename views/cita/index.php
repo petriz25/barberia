@@ -29,8 +29,9 @@
             <div class="campo">
                 <label for="fecha">Fecha</label>
                 <input 
-                id="nombre"
+                id="fecha"
                 type="date"
+                min="<?php echo date('Y-m-d'); ?>"
                 >
             </div>
             <div class="campo">
@@ -38,8 +39,19 @@
                 <input 
                 id="hora"
                 type="time"
-                placeholder="Tu Nombre"
                 >
+            </div>
+
+            <div class="campo">
+                <label for="empleado">Barber</label>
+                <select name="empleados[id]" id="empleado" value="">
+                    <option value="">-- Seleccione --</option>
+                    <?php foreach($empleados as $empleado):  ?>
+                        <option>
+                        <?php echo s($empleado->nombre) . " " . s($empleado->apellido); ?> 
+                        </option>
+                    <?php endforeach; ?>
+                </select>
             </div>
         </form>
     </div>

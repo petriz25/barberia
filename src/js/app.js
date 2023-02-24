@@ -21,6 +21,10 @@ function inciarApp(){
     paginaAnterior();
 
     consultarAPI();//Consulta la API en el back-end de php
+
+    nombreCliente(); //Añade el nombre del cliente al objeto de cita
+    seleccionarFecha(); //Añade la fecha de cita en el objeto
+    seleccionarHora(); //Añade la hora de cita en el objeto
 };
 
 function mostrarSeccion(){
@@ -135,8 +139,75 @@ function mostrarServicios(servicios){
     })
 }
 
-function seleccionarServicio(){
+function seleccionarServicio(servicio){
+    const { id } = servicio;
     const { servicios } = cita;
+    //Identifica el elemento al que se le da click
+    const divServicio = document.querySelector(`[data-id-servicio="${id}"]`);
+    //Comprobar si el servicio ya fue agregado
+    if( servicios.some( agregado => agregado.id === id ) ){
+        //Eliminarlo
+        divServicio.classList.remove('seleccionado');
+        cita.servicios = servicios.filter( agregado => agregado.id !== id);
+    }else{
+        //Agregarlo
+        divServicio.classList.add('seleccionado');
+        cita.servicios = [...servicios, servicio];
+    }
+}
 
-    cita.servicios = [...servicios, servicio];
+function nombreCliente(){
+    cita.nombre = document.querySelector('#nombre').value;
+}
+
+function seleccionarFecha(){
+    const inputFecha = document.querySelector('#fecha');
+    inputFecha.addEventListener('input', function(e){
+        cita.fecha = e.target.value;
+
+        //Dias que no se trabajan
+        // const dia = new Date(e.target.value).getUTCDay();
+
+        // if([6,0].includes(dia)){
+        //     e.target.value= '';
+        //     mostrarAlerta('Fines de semana no permitidos', 'error');
+        // }else{
+        //     cita.fecha = e.target.value;
+        // }
+    })
+}
+
+function seleccionarHora(){
+    const inputHora = document.querySelector('#hora');
+    inputHora.addEventListener('input', function(e){
+        const horaCita = e.target.value;
+        const hora = horaCita.split(":")[0];
+
+        if(hora < 12 || hora > 20){
+            e.target.value = '';
+            mostrarAlerta('Horarios dia Entre Semana de 12am a 08pm', 'error');
+        }else{
+            cita.hora = e.target.value;
+        }
+    })
+}
+
+function mostrarAlerta(mensaje, tipo){
+    //Previene que se genere mas d euna alerta
+    const alertaPrevia = document.querySelector('.alerta');
+    if(alertaPrevia) return;
+
+    //Scriptin para una alerta
+    const alerta = document.createElement('DIV');
+    alerta.textContent = mensaje;
+    alerta.classList.add('alerta');
+    alerta.classList.add(tipo);
+
+    const formulario = document.querySelector('.formulario');
+    formulario.appendChild(alerta);
+
+    //Eliminar la alerta
+    setTimeout(() => {
+        alerta.remove();
+    }, 3000);
 }

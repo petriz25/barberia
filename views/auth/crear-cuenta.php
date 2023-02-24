@@ -37,6 +37,7 @@
         placeholder="Tu Telefono"
         name="telefono"
         value="<?php echo s($usuario->telefono); ?>"
+        max=10;
         >
     </div>
 
