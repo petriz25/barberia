@@ -30,6 +30,15 @@
     </div>
 
     <div class="campo">
+                <label for="fecha_nac">Fecha</label>
+                <input 
+                id="fecha_nac"
+                type="date"
+                max="<?php echo date('Y-m-d'); ?>"
+                >
+    </div>
+
+    <div class="campo">
         <label for="telefono">Telefono</label>
         <input 
         type="tel"

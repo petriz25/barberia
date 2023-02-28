@@ -5,11 +5,12 @@ namespace Model;
 class Usuario extends ActiveRecord{
     //Base de datos
     protected static $tabla = 'usuarios';
-    protected static $columnasDB = ['id','nombre','apellido','email','password','telefono','admin','confirmado','token'];
+    protected static $columnasDB = ['id','nombre','apellido', 'fecha_nac','email','password','telefono','admin','confirmado','token'];
 
     public $id;
     public $nombre;
     public $apellido;
+    public $fecha_nac;
     public $email;
     public $password;
     public $telefono;
@@ -22,6 +23,7 @@ class Usuario extends ActiveRecord{
         $this->id = $args['id'] ?? null;
         $this->nombre = $args['nombre'] ?? '';
         $this->apellido = $args['apellido'] ?? '';
+        $this->fecha_nac = $args['fecha_nac'] ?? '';
         $this->email = $args['email'] ?? '';
         $this->password = $args['password'] ?? '';
         $this->telefono = $args['telefono'] ?? '';

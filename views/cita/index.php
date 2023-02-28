@@ -27,6 +27,17 @@
                 >
             </div>
             <div class="campo">
+                <label for="empleado">Barber</label>
+                <select name="empleados[id]" id="empleado" value="">
+                    <option value="">-- Opcional --</option>
+                    <?php foreach($empleados as $empleado):  ?>
+                        <option>
+                        <?php echo s($empleado->nombre) . " " . s($empleado->apellido); ?> 
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div class="campo">
                 <label for="fecha">Fecha</label>
                 <input 
                 id="fecha"
@@ -39,23 +50,13 @@
                 <input 
                 id="hora"
                 type="time"
+                min="10:00"
+                max="20:00"
                 >
-            </div>
-
-            <div class="campo">
-                <label for="empleado">Barber</label>
-                <select name="empleados[id]" id="empleado" value="">
-                    <option value="">-- Seleccione --</option>
-                    <?php foreach($empleados as $empleado):  ?>
-                        <option>
-                        <?php echo s($empleado->nombre) . " " . s($empleado->apellido); ?> 
-                        </option>
-                    <?php endforeach; ?>
-                </select>
             </div>
         </form>
     </div>
-    <div class="seccion" id="paso-3">
+    <div class="seccion contenido-resumen" id="paso-3">
         <h2>Resumen</h2>
         <p class="text-center">Verifica que la información sea correcta</p>
     </div>
