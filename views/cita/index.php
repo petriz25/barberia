@@ -28,7 +28,7 @@
             </div>
             <div class="campo">
                 <label for="empleado">Barber</label>
-                <select name="empleados[id]" id="empleado" value="">
+                <select name="empleados[id]" id="empleado" value="<?php echo $empleados->id ?>">
                     <option value="">-- Opcional --</option>
                     <?php foreach($empleados as $empleado):  ?>
                         <option>
@@ -50,10 +50,9 @@
                 <input 
                 id="hora"
                 type="time"
-                min="10:00"
-                max="20:00"
                 >
             </div>
+            <input type="hidden" id="id" value="<?php echo $id; ?>">
         </form>
     </div>
     <div class="seccion contenido-resumen" id="paso-3">
