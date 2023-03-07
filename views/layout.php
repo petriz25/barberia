@@ -6,6 +6,9 @@
     <title>Barberia</title>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="build/css/app.css">
+    <?php
+        echo $script ?? '';
+    ?>
 </head>
 <body>
     <div class="contenedor-app">
@@ -14,10 +17,6 @@
             <?php echo $contenido; ?>
         </div>
     </div>
-
-    <?php
-        echo $script ?? '';
-    ?>
             
 </body>
 </html>

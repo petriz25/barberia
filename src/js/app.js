@@ -7,6 +7,7 @@ const cita = {
     nombre: '',
     fecha: '',
     hora: '',
+    empleado: '',
     servicios:  []
 }
 
@@ -25,7 +26,6 @@ function inciarApp(){
 
     idCliente(); 
     nombreCliente(); //Añade el nombre del cliente al objeto de cita
-    // seleccionarEmpleado(); //Añadimos el empleado que atendera la cita
     seleccionarFecha(); //Añade la fecha de cita en el objeto
     seleccionarHora(); //Añade la hora de cita en el objeto
 
@@ -162,9 +162,13 @@ function seleccionarServicio(servicio){
     }
 }
 
-// function idCliente(){
-//     cita.id = document.querySelector('#id').value;
-// }
+function idCliente(){
+    cita.id = document.querySelector('#id').value;
+}
+
+function seleccionarEmpleado(){
+    cita.empleado = document.querySelector('#empleado').value;
+}
 
 function nombreCliente(){
     cita.nombre = document.querySelector('#nombre').value;
@@ -238,6 +242,8 @@ function mostrarAlerta(mensaje, tipo, elemento, desaparece = true){
 }
 
 function mostrarResumen(){
+    seleccionarEmpleado(); //Añadimos el empleado que atendera la cita
+
     const resumen = document.querySelector('.contenido-resumen');
 
     //Limpiar el contenido de resumen 
@@ -310,16 +316,18 @@ function mostrarResumen(){
 }
 
 async function reservarCita(){
-    const { id, nombre, fecha, hora, servicios} = cita;
+    const { id, nombre, fecha, hora, servicios, empleado} = cita;
     const idServicios = servicios.map(servicio => servicio.id);
 
     const datos = new FormData();
     datos.append('fecha', fecha);
     datos.append('hora', hora);
-    // datos.append('usuariosId', id);
+    datos.append('usuariosId', id);
+    datos.append('empleadoId', empleado);
     datos.append('servicios', idServicios);
 
-    //Petición hacia la api 
+    try {
+        //Petición hacia la api 
     const url = 'http://localhost:4000/api/citas';
 
     const respuesta = await fetch(url, {
@@ -328,6 +336,25 @@ async function reservarCita(){
     })
 
     const resultado = await respuesta.json();
-    console.log(resultado);
+    console.log(resultado.resultado);
 
-}
+    if(resultado.resultado){
+        Swal.fire({
+            icon: 'success',
+            title: 'Cita Creada',
+            text: 'Tu cita fue creada correctamente',
+            button: 'OK'
+          }).then(() => {
+            setTimeout(() => {
+                window.location.reload();
+            }, 3000);
+          })
+    }
+    } catch (error) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Hubo un error al guardar la cita'
+          })
+    }
+ }

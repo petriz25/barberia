@@ -1,3 +1,7 @@
+<?php
+    include_once __DIR__ . '/../templates/barra'
+?>
+
 <h1 class="nombre-pagina">Crear nueva cita</h1>
 <p class="descripcion-pagina">Elige tus servicios y coloca tus datos</p>
 
@@ -28,10 +32,10 @@
             </div>
             <div class="campo">
                 <label for="empleado">Barber</label>
-                <select name="empleados[id]" id="empleado" value="<?php echo $empleados->id ?>">
+                <select id="empleado">
                     <option value="">-- Opcional --</option>
                     <?php foreach($empleados as $empleado):  ?>
-                        <option>
+                        <option value="<?php echo $empleado->id ?>">
                         <?php echo s($empleado->nombre) . " " . s($empleado->apellido); ?> 
                         </option>
                     <?php endforeach; ?>
@@ -75,6 +79,7 @@
 
 <?php
     $script = "
+        <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
         <script src='build/js/app.js'></script>
     ";
 ?>

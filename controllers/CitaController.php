@@ -10,6 +10,8 @@ class CitaController{
             session_start();//se inicia session y se puede acceder a $_SESSION
         }; 
 
+        isAut();
+
         $empleados = Empleado::all();
 
         $router->render('/cita/index', [
