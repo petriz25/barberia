@@ -35,6 +35,8 @@
                 id="fecha_nac"
                 type="date"
                 max="<?php echo date('Y-m-d'); ?>"
+                name="fecha_nac"
+                value="<?php echo s($usuario->fecha_nac); ?>"
                 >
     </div>
 
@@ -46,7 +48,7 @@
         placeholder="Tu Telefono"
         name="telefono"
         value="<?php echo s($usuario->telefono); ?>"
-        max=10;
+        max=10
         >
     </div>
 

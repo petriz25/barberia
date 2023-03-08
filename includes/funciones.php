@@ -19,3 +19,11 @@ function isAut(){
         header('Location: /');
     }
 }
+
+function esUltimo(string $actual, string $proximo): bool{
+    if($actual!==$proximo){
+        return true;
+    }
+    return false;
+
+}

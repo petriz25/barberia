@@ -4,14 +4,15 @@
 .contenedor-app{
     @include m.tablet{
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, 2fr);
         min-height: 100vh;
     }
 
     .imagen{
+
         height: 30rem;
         background-image: url(../img/layout.jpg);
-        background-size: cover;
+        background-size:cover;
         background-position: center center;
 
         @include m.tablet{
@@ -19,10 +20,16 @@
         }
     }
 
+    .app::-webkit-scrollbar {display: none;}
     .app{
         width: 95%;
         margin: 0 auto;
         padding: 3rem 0;
+        @include m.tablet{
+            overflow:scroll;
+        }
+
+
     }
 }
 

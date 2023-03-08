@@ -8,11 +8,15 @@
     <link rel="stylesheet" href="build/css/app.css">
     <?php
         echo $script ?? '';
+        // if(!isset($inicio)){
+        //     $inicio = true;
+        // }
     ?>
 </head>
 <body>
     <div class="contenedor-app">
-        <div class="imagen"></div>
+        <div class="imagen">
+        </div>
         <div class="app">
             <?php echo $contenido; ?>
         </div>

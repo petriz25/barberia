@@ -1,5 +1,5 @@
 <?php
-    include_once __DIR__ . '/../templates/barra'
+    include_once __DIR__ . '/../templates/barra.php';
 ?>
 
 <h1 class="nombre-pagina">Crear nueva cita</h1>
