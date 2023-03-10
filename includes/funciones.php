@@ -20,6 +20,12 @@ function isAut(){
     }
 }
 
+function isAdmin(){
+    if(!isset($_SESSION['admin'])){
+        header('Location: /');
+    }
+}
+
 function esUltimo(string $actual, string $proximo): bool{
     if($actual!==$proximo){
         return true;

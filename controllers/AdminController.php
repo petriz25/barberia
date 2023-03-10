@@ -11,6 +11,8 @@ class AdminController{
             session_start();//se inicia session y se puede acceder a $_SESSION
         };
 
+        isAdmin();
+
         $fecha = $_GET['fecha'] ?? date('Y-m-d');
         $fechas = explode('-', $fecha);
 
