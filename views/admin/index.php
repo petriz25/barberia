@@ -36,11 +36,12 @@ include_once __DIR__ . '/../templates/barra.php';
             <p>ID: <span><?php echo $cita->id; ?></span></p>
             <p>Hora: <span><?php echo $cita->hora; ?></span></p>
             <p>Cliente: <span><?php echo $cita->cliente; ?></span></p>
+            <div class="cita-oculta">
             <p>Email: <span><?php echo $cita->email; ?></span></p>
             <p>Telefono: <span><?php echo $cita->telefono; ?></span></p>
             <p>Le atendera: <span><?php echo $cita->empleado; ?></span></p>
 
-            <h3>Servicios</h3>
+            <h3 class="s">Servicios</h3>
             <?php $idCita = $cita->id; } //Fin del if 
                 $total += $cita->precio;
             ?>
@@ -57,7 +58,7 @@ include_once __DIR__ . '/../templates/barra.php';
                     <input type="submit" class="boton-eliminar" value="Eliminar">
                 </form>
                 <?php } 
-             } //Fin del foreach ?>
+             } //Fin del foreach ?></div>
     </ul>
 </div>
 

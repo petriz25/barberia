@@ -3,7 +3,6 @@
 ?>
 
 <h1 class="nombre-pagina">Crear nueva cita</h1>
-<p class="descripcion-pagina">Elige tus servicios y coloca tus datos</p>
 
 <div class="app">
     <nav class="tabs">
@@ -14,6 +13,22 @@
     <div class="seccion" id="paso-1">
         <h2>Servicios</h2>
         <p class="text-center">Elije tus servicios a continuación</p>
+        <!-- <div class="app">
+            <nav class="tabs">
+                <button type="button" data-paso="11">Cabello</button>
+                <button type="button" data-paso="22">Barba</button>
+                <button type="button" data-paso="33">Otros</button>
+            </nav>
+            <div class="seccion" id="paso-11">
+                <div class="listado-servicios" id="servicios"></div>
+            </div>
+            <div class="seccion" id="paso-22">
+                
+            </div>
+            <div class="seccion" id="paso-33">
+
+            </div>
+        </div> -->
         <div class="listado-servicios" id="servicios"></div>
     </div>
     <div class="seccion" id="paso-2">
