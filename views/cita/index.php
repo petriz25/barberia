@@ -64,12 +64,26 @@
                 min="<?php echo date('Y-m-d'); ?>"
                 >
             </div>
-            <div class="campo">
+            <!-- <div class="campo">
                 <label for="hora">Hora</label>
                 <input 
                 id="hora"
                 type="time"
                 >
+            </div> -->
+
+            <div class="formulario__campo" id="horas">
+                <label class="formulario__label">Seleccionar Hora</label>
+                <ul class="horas">
+                <?php foreach($horas as $horario): ?>
+                    <?php foreach($citas as $cita): ?>
+                        <?php if($citas->hora === $horario){?>
+                            <li disabled onclick="seleccionarHora(<?php echo $hora->id ?>);" id="hora" class="horas__hora" value="<?php echo $hora->id ?>"><?php echo $hora->hora; ?></li>
+                            <?php }else{ ?>
+                                <li onclick="seleccionarHora(<?php echo $hora->id ?>);" id="hora" class="horas__hora" value="<?php echo $hora->id ?>"><?php echo $hora->hora; ?></li>
+                            <?php }endforeach; ?>
+                    <?php endforeach; ?>
+                </ul>
             </div>
             <input type="hidden" id="id" value="<?php echo $id; ?>">
         </form>
