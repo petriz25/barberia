@@ -13,22 +13,6 @@
     <div class="seccion" id="paso-1">
         <h2>Servicios</h2>
         <p class="text-center">Elije tus servicios a continuación</p>
-        <!-- <div class="app">
-            <nav class="tabs">
-                <button type="button" data-paso="11">Cabello</button>
-                <button type="button" data-paso="22">Barba</button>
-                <button type="button" data-paso="33">Otros</button>
-            </nav>
-            <div class="seccion" id="paso-11">
-                <div class="listado-servicios" id="servicios"></div>
-            </div>
-            <div class="seccion" id="paso-22">
-                
-            </div>
-            <div class="seccion" id="paso-33">
-
-            </div>
-        </div> -->
         <div class="listado-servicios" id="servicios"></div>
     </div>
     <div class="seccion" id="paso-2">
@@ -50,7 +34,7 @@
                 <select id="empleado">
                     <option value="">-- Opcional --</option>
                     <?php foreach($empleados as $empleado):  ?>
-                        <option value="<?php echo $empleado->id ?>">
+                        <option id="empleado" value="<?php echo $empleado->id ?>">
                         <?php echo s($empleado->nombre) . " " . s($empleado->apellido); ?> 
                         </option>
                     <?php endforeach; ?>
@@ -64,25 +48,18 @@
                 min="<?php echo date('Y-m-d'); ?>"
                 >
             </div>
-            <!-- <div class="campo">
-                <label for="hora">Hora</label>
-                <input 
-                id="hora"
-                type="time"
-                >
-            </div> -->
-
             <div class="formulario__campo" id="horas">
                 <label class="formulario__label">Seleccionar Hora</label>
                 <ul class="horas">
-                <?php foreach($horas as $horario): ?>
-                    <?php foreach($citas as $cita): ?>
-                        <?php if($citas->hora === $horario){?>
-                            <li disabled onclick="seleccionarHora(<?php echo $hora->id ?>);" id="hora" class="horas__hora" value="<?php echo $hora->id ?>"><?php echo $hora->hora; ?></li>
-                            <?php }else{ ?>
-                                <li onclick="seleccionarHora(<?php echo $hora->id ?>);" id="hora" class="horas__hora" value="<?php echo $hora->id ?>"><?php echo $hora->hora; ?></li>
-                            <?php }endforeach; ?>
+                <?php foreach($horas as $hora): ?>
+                    <?php foreach($horarios as $horario): ?>
+                        <?php if($horario->horarioId == $hora->id){?>
+                            <li onclick="seleccionarHora(<?php echo $hora->id ?>);" id="hora" class="horas__inactiva" value="<?php echo $hora->id ?>"><?php echo $hora->hora; ?></li>
+                        <?php break; } else{ ?>
+                            <li onclick="seleccionarHora(<?php echo $hora->id ?>);" id="hora" class="horas__hora" value="<?php echo $hora->id ?>"><?php echo $hora->hora; ?></li>
+                        <?php break; } ?>
                     <?php endforeach; ?>
+                <?php endforeach; ?>
                 </ul>
             </div>
             <input type="hidden" id="id" value="<?php echo $id; ?>">

@@ -3,8 +3,9 @@
 namespace Controllers;
 
 use Model\Cita;
-use Model\CitaServicioEmpleado;
 use Model\Servicio;
+use Model\HorarioEmpleado;
+use Model\CitaServicioEmpleado;
 
 class APIController{
     public static function index(){
@@ -18,11 +19,12 @@ class APIController{
         $resultado = $cita->guardar();
         $id=$resultado['id'];
         $idEmpleado=$cita->empleadoId;
+        $horario = $cita->horaId;
 
         $idServicios = explode(',', $_POST['servicios']);
 
 
-        // //Almacena servicios con el id de la cita
+        //Almacena servicios con el id de la cita
         foreach($idServicios as $idServicio){
             $args = [
                 'citaId'=> $id,
@@ -33,7 +35,15 @@ class APIController{
             $citaServicio->guardar();
         }
 
-        // //Retornamos una respuesta
+        $args2 = [
+                'citaId' => $id,
+                'empleadoId' => $idEmpleado,
+                'horarioId' => $horario
+        ];
+        $horarioEmpleado = new HorarioEmpleado($args2);
+        $horarioEmpleado->guardar();
+
+        //Retornamos una respuesta
         echo json_encode(['resultado' => $resultado]);
     }
 
