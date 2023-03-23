@@ -4,6 +4,8 @@
 
 <h1 class="nombre-pagina">Crear nueva cita</h1>
 
+<div id="datos" data-datos="{{ json_encode($data) }}"></div>
+
 <div class="app">
     <nav class="tabs">
         <button type="button" data-paso="1">Servicios</button>
@@ -11,8 +13,7 @@
         <button type="button" data-paso="3">Resumen</button>
     </nav>
     <div class="seccion" id="paso-1">
-        <h2>Servicios</h2>
-        <p class="text-center">Elije tus servicios a continuación</p>
+        <p class="text-center">Elige tus servicios a continuación</p>
         <div class="listado-servicios" id="servicios"></div>
     </div>
     <div class="seccion" id="paso-2">
@@ -31,7 +32,7 @@
             </div>
             <div class="campo">
                 <label for="empleado">Barber</label>
-                <select id="empleado">
+                <select id="empleados">
                     <option value="">-- Opcional --</option>
                     <?php foreach($empleados as $empleado):  ?>
                         <option id="empleado" value="<?php echo $empleado->id ?>">
@@ -48,17 +49,16 @@
                 min="<?php echo date('Y-m-d'); ?>"
                 >
             </div>
-            <div class="formulario__campo" id="horas">
+            <div class="formulario__campo" id="horarios-hora">
                 <label class="formulario__label">Seleccionar Hora</label>
-                <ul class="horas">
+                <ul class="horas" id="horarios">
                 <?php foreach($horas as $hora): ?>
-                    <?php foreach($horarios as $horario): ?>
-                        <?php if($horario->horarioId == $hora->id){?>
-                            <li onclick="seleccionarHora(<?php echo $hora->id ?>);" id="hora" class="horas__inactiva" value="<?php echo $hora->id ?>"><?php echo $hora->hora; ?></li>
-                        <?php break; } else{ ?>
-                            <li onclick="seleccionarHora(<?php echo $hora->id ?>);" id="hora" class="horas__hora" value="<?php echo $hora->id ?>"><?php echo $hora->hora; ?></li>
-                        <?php break; } ?>
-                    <?php endforeach; ?>
+                    <?php if (in_array($hora->id, array_column($horarios, 'horarioId'))): ?>
+                        <?php $class = 'horas__inactiva'; ?>
+                    <?php else: ?>
+                        <?php $class = 'horas__hora'; ?>
+                    <?php endif; ?>
+                    <li onclick="seleccionarHora(<?php echo $hora->id ?>);" id="hora" class="<?php echo $class; ?>" value="<?php echo $hora->id ?>"><?php echo $hora->hora; ?></li>
                 <?php endforeach; ?>
                 </ul>
             </div>
@@ -82,6 +82,10 @@
         >Siguiente &raquo;</button>
     </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.4.slim.min.js" 
+integrity="sha256-a2yjHM4jnF9f54xUQakjZGaqYs/V1CYvWpoqZzC2/Bw=" 
+crossorigin="anonymous"></script>
 
 <?php
     $script = "

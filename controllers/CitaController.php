@@ -27,12 +27,14 @@ class CitaController{
         $consulta = "SELECT * FROM horarioempleado WHERE empleadoId = ${empleado} ;";
         $horarios = HorarioEmpleado::SQL($consulta);
 
-        $router->render('/cita/index', [
+        $data = [
             'nombre' => $_SESSION['nombre'],
             'id' => $_SESSION['id'],
             'empleados' => $empleados, 
             'horas' => $horas, 
             'horarios' => $horarios
-        ]);
+        ];
+
+        $router->render('/cita/index', $data);
     }
 }
