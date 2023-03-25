@@ -3,6 +3,7 @@
 namespace Controllers;
 
 use Model\Cita;
+use MVC\Router;
 use Model\Servicio;
 use Model\HorarioEmpleado;
 use Model\CitaServicioEmpleado;
@@ -11,6 +12,26 @@ class APIController{
     public static function index(){
         $servicios = Servicio::all();
         echo json_encode($servicios);
+    }
+
+    public static function horariosDisponibles(){
+        $horarios = HorarioEmpleado::all();
+        $empleado = $_GET['idEmpleado'];
+        $fecha = $_GET['fecha'] ?? date('Y-m-d');
+
+        $consulta = "SELECT horas.id, 
+        horas.hora, 
+        citas.id AS citaId,
+        empleados.id as empleadoId,
+        CONCAT( empleados.nombre, ' ', empleados.apellido) as empleado
+        FROM horas 
+        INNER JOIN empleados
+        LEFT JOIN citas
+        ON citas.fecha = '${fecha}'
+    	AND empleados.id = citas.empleadoId
+    	AND citas.horaId = horas.id; ;";
+        $horasDisponibles = HorarioEmpleado::SQL($consulta);
+        echo json_encode($horasDisponibles, JSON_UNESCAPED_UNICODE);
     }
 
     public static function guardar(){

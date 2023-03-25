@@ -49,7 +49,7 @@
                 min="<?php echo date('Y-m-d'); ?>"
                 >
             </div>
-            <div class="formulario__campo" id="horarios-hora">
+            <div class="formulario__campo">
                 <label class="formulario__label">Seleccionar Hora</label>
                 <ul class="horas" id="horarios">
                 <?php foreach($horas as $hora): ?>

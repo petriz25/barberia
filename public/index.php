@@ -37,6 +37,7 @@ $router->get('/admin', [AdminController::class, 'index']);
 //API de Citas
 $router->get('/api/servicios', [APIController::class, 'index']);
 $router->post('/api/citas', [APIController::class, 'guardar']);
+$router->get('/api/citas/horariosDisponibles', [APIController::class, 'horariosDisponibles']);
 $router->post('/api/eliminar', [APIController::class, 'eliminar']);
 
 //CRUD Servicios

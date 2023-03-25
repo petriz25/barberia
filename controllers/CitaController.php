@@ -14,25 +14,9 @@ class CitaController{
             session_start();//se inicia session y se puede acceder a $_SESSION
         }; 
 
-        isAut();
-
-        $empleados = Empleado::all();
-        $horas = Hora::all();
-        $fecha = $_GET['fecha'] ?? date('Y-m-d');
-        $fechas = explode('-', $fecha);
-        $empleado = $_GET['idEmpleado'] ?? 0;
-        $horarioEmpleado = HorarioEmpleado::all();
-
-        //Consultar la base de datos
-        $consulta = "SELECT * FROM horarioempleado WHERE empleadoId = ${empleado} ;";
-        $horarios = HorarioEmpleado::SQL($consulta);
-
         $data = [
             'nombre' => $_SESSION['nombre'],
-            'id' => $_SESSION['id'],
-            'empleados' => $empleados, 
-            'horas' => $horas, 
-            'horarios' => $horarios
+            'id' => $_SESSION['id']
         ];
 
         $router->render('/cita/index', $data);
