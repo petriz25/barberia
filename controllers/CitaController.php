@@ -13,10 +13,12 @@ class CitaController{
         if(!isset($_SESSION)) {//evitar error de 'ignorar session'
             session_start();//se inicia session y se puede acceder a $_SESSION
         }; 
+        $empleados = Empleado::all();
 
         $data = [
             'nombre' => $_SESSION['nombre'],
-            'id' => $_SESSION['id']
+            'id' => $_SESSION['id'],
+            'empleados' => $empleados
         ];
 
         $router->render('/cita/index', $data);

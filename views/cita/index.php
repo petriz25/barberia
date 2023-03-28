@@ -52,14 +52,7 @@
             <div class="formulario__campo">
                 <label class="formulario__label">Seleccionar Hora</label>
                 <ul class="horas" id="horarios">
-                <?php foreach($horas as $hora): ?>
-                    <?php if (in_array($hora->id, array_column($horarios, 'horarioId'))): ?>
-                        <?php $class = 'horas__inactiva'; ?>
-                    <?php else: ?>
-                        <?php $class = 'horas__hora'; ?>
-                    <?php endif; ?>
-                    <li onclick="seleccionarHora(<?php echo $hora->id ?>);" id="hora" class="<?php echo $class; ?>" value="<?php echo $hora->id ?>"><?php echo $hora->hora; ?></li>
-                <?php endforeach; ?>
+                
                 </ul>
             </div>
             <input type="hidden" id="id" value="<?php echo $id; ?>">

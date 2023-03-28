@@ -49,13 +49,6 @@ class LoginController{
         ]);
     }
 
-    public static function logout(){
-        session_start();
-
-        $_SESSION = [];
-        header('Location: /');
-    }
-
     public static function olvide(Router $router){
         $alertas=[];
 
@@ -200,5 +193,12 @@ class LoginController{
         $router->render('auth/confirmar-cuenta', [
             'alertas' => $alertas
         ]);
+    }
+
+    public static function logout(){
+        session_start();
+
+        $_SESSION = [];
+        header('Location: /');
     }
 }

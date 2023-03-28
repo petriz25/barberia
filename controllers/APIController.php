@@ -3,6 +3,7 @@
 namespace Controllers;
 
 use Model\Cita;
+use Model\Hora;
 use MVC\Router;
 use Model\Servicio;
 use Model\HorarioEmpleado;
@@ -18,19 +19,16 @@ class APIController{
         $horarios = HorarioEmpleado::all();
         $empleado = $_GET['idEmpleado'];
         $fecha = $_GET['fecha'] ?? date('Y-m-d');
-
+        
         $consulta = "SELECT horas.id, 
-        horas.hora, 
-        citas.id AS citaId,
-        empleados.id as empleadoId,
-        CONCAT( empleados.nombre, ' ', empleados.apellido) as empleado
-        FROM horas 
-        INNER JOIN empleados
-        LEFT JOIN citas
-        ON citas.fecha = '${fecha}'
-    	AND empleados.id = citas.empleadoId
-    	AND citas.horaId = horas.id; ;";
-        $horasDisponibles = HorarioEmpleado::SQL($consulta);
+        CASE WHEN citas.fecha IS NOT NULL THEN false ELSE true END AS disponible
+        FROM horas
+        LEFT JOIN citas 
+        ON horas.id = citas.horaId 
+        AND citas.fecha = '${fecha}'
+        AND citas.empleadoId = ${empleado};";
+
+        $horasDisponibles = Hora::SQL($consulta);
         echo json_encode($horasDisponibles, JSON_UNESCAPED_UNICODE);
     }
 
