@@ -3,7 +3,7 @@
     <a class="boton" href="/logout">Cerrar Sesión</a>
 </div>
  
-<?php if($_SESSION['admin'] === '1'): ?>
+<?php if(isset($_SESSION['admin'])): ?>
 
     <div class="barra-servicios">
         <a class="boton" href="/admin">Ver citas</a>
